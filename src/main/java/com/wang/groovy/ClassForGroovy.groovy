@@ -1,7 +1,5 @@
 package com.wang.groovy
 
-import groovy.lang.Closure;
-
 class Song {
 	def name
 	def artist
@@ -32,7 +30,7 @@ class ClassForGroovy {
 		assert song.genre == "DISCO"
 
 		// Question mark(?) check song.artist to prevent null point exception.
-		println song.artist?.toLowerCase()
+		println song.artist?.toLowerCase()  // (song.artist == null)? null : song.artist.toLowerCase()
 	}
 }
 

@@ -22,7 +22,7 @@ println "\n** Example 1 ******************************************************"
  */
 // Call a function, no type definition for function also
 def repeat(val){
-	for(i in 0..<val){
+	for(i in 0..<val) {  // 0..<val 表示一个右不包含的 groovy.lang.IntRange：[0,1,2,...12) 不含 12
 		println i+1
 	}
 }
@@ -35,22 +35,22 @@ println "\n** Example 2 ******************************************************"
  * List
  */
 def range = 0..4
-println range.class
-assert range instanceof List
+println range.class  // groovy.lang.IntRange
+assert range instanceof List  // groovy.lang.IntRange 是 List interface 的子类
 
 // All assembles are instance of Collection and List
 def coll = ["Groovy", "Java", "Ruby", 1]
 println coll
-assert  coll instanceof Collection
+assert  coll instanceof Collection   // 也是 Collection 的子类
 assert coll instanceof ArrayList
 
 // Add elements to list
 coll.add("Python")
 coll << "Smalltalk"
 // Trick! We add something over 6!
-coll[7] = "Perl"
+coll[7] = "Perl"  // 是合法的，List 自动将第 6 个元素设为 null
 println coll
-println coll[6]
+println coll[6]   // null ！
 
 // Operation for a list
 def numbers = [1, 2, 3, 4]
@@ -71,7 +71,7 @@ println "\n** Example 3 ******************************************************"
  * Map
  */
 // Map value's type not have to be same all the way. And the name will be converted to String, no meter has it been named.
-def hash = [name:"Andy", "VPN-#":45]
+java.util.LinkedHashMap<String, Serializable> hash = [name:"Andy", "VPN-#":45]
 println hash
 assert hash.getClass() == java.util.LinkedHashMap
 
@@ -86,7 +86,7 @@ assert hash.dob == "01/29/76"
 // Change and add
 assert hash["name"] == "Andy"
 hash["name"] = "And"
-assert hash.name == "And"
+assert hash.name == "And"   // 可以直接引用 key name。
 
 hash["gender"] = "male"
 assert hash["gender"] == "male"
@@ -101,7 +101,7 @@ println "\n** Example 4 ******************************************************"
  * 
  */
 def acoll = ["Groovy", "Java", "Ruby"]
-// 闭包是一段由 {} 包裹起来的匿名函数. 因为闭包是一个代码块，所以能够作为参数进行传递
+// 支持 lambda 函数
 acoll.each { println it }
 // The above "it" is the default value name for the parameter passing to ".each". can be override by something else, for example "value"
 acoll.each{ value -> println value }
@@ -116,8 +116,8 @@ hash.each{ key, value ->
 "ITERATION".each{ print it.toLowerCase() }
 println ""
 
-// 以下这个闭包将一个参数 “Hello Groovy” 做为 excite的参数传给 word，而word执行一段代码再将这个参数加上两个"!"返回给 excite
-def excite = { word -> return "${word}!!" }
+// 定义一个 lambda 函数：入参是 word以
+def excite = { word -> return "${word}!!" }  // interpolated string 语法
 println excite("Hello Groovy")
 println excite.call("Call Groovy")
 
